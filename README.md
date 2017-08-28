@@ -92,7 +92,7 @@ DELETE
  - CLI (command line interface) with `curl`
    - e.g. `curl -H "Content-Type: application/json" -X POST -d '{"username":"kate","password":"1234"}' http://localhost:3000/api/login`
    - `-H`: headers. `-X`: verb. `-d`: data (must be of the type specified in headers). http://[address]:[port]/[route_path]
- - [Postman](https://www.getpostman.com/)
+ - [Postman](n/)
    ![](https://www.dropbox.com/s/4fk3b90cd0i1a5y/postman_post.png?raw=true)
 - Databases: use Sequelize in your routes and see if you are receiving what you expect
 
