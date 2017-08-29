@@ -3,15 +3,29 @@ import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './Navbar';
 import Students from './Students';
 import Campuses from './Campuses';
+import SingleStudent from './SingleStudent';
+import SingleCampus from './SingleCampus';
+import {fetchStudents, fetchCampuses} from '../reducers';
+import store from '../store';
 
 export default class Root extends Component {
+
+    componentDidMount() {
+        store.dispatch(fetchCampuses());
+        store.dispatch(fetchStudents());
+    }
     render() {
         return (
             <Router>
                 <div>
-                    <div>
-                        <Navbar />
-                        <Campuses />
+                    <Navbar />
+                    <div className='container-fluid'>
+                        <Switch>
+                            <Route exact path="/students" component={Students} />
+                            <Route exact path="/campuses" component={Campuses} />
+                            <Route path="/students/:studentId" component={SingleStudent} />
+                            <Route path="/campuses/:campusId" component={SingleCampus} />
+                        </Switch>
                     </div>
                 </div>
             </Router>
