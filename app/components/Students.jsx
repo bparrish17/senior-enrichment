@@ -24,9 +24,8 @@ export default class Students extends React.Component {
         this.unsubscribe = store.subscribe(() => this.setState(store.getState()))
     }
 
-    handleDelete (event) {
-        console.log(event);
-        //store.dispatch(deleteStudent(studentId));
+    handleDelete (studentId) {
+        store.dispatch(deleteStudent(studentId));
     }
 
     render() {
@@ -46,7 +45,7 @@ export default class Students extends React.Component {
                             </Link>
                             <li><button 
                                 className="btn btn-xs btn-danger remove btn-circle"
-                                onClick={this.handleDelete}>
+                                onClick={() => this.handleDelete(student.id)}>
                                     Remove</button></li>
                             <li><button className="btn btn-xs btn-primary edit btn-circle">Edit Student</button></li>
                         </div>
