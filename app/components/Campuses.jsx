@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import store from '../store';
-import {fetchCampuses} from '../reducers/index.jsx'; 
 import {getAllCampuses} from '../reducers/index.jsx';
 
 export default class Campuses extends React.Component {
@@ -12,30 +11,24 @@ export default class Campuses extends React.Component {
         this.state = store.getState();
     }
     componentDidMount () {
-        const thunk = fetchCampuses();
-        store.dispatch(thunk)
-        // axios.get('/api/campuses/')
-        //   .then(res => res.data)
-        //   .then(campuses => {
-        //     this.setState({ campuses })
-        //   });
         this.unsubscribe = store.subscribe(() => this.setState(store.getState()))
     }
     render() {
         const campuses = this.state.campuses;
         return (
             <div>
+                <div className="row container-fluid">
                 <h3>Campuses</h3>
-                <div className="row">
+                <br />
                 {
                     campuses.map(campus => { 
                         return(
-                        <div className="col-xs-6" key={campus.id}>
-                            <Link className="thumbnail" to={`/campuses/${campus.id}`}>
+                        <div className="col-xs-4" key={campus.id}>
+                            <Link className="thumbnail img-responsive" to={`/campuses/${campus.id}`}>
                             <h3>
                                 <span>{campus.name}</span>
                             </h3>
-                            <img className="media-object" src={campus.imgUrl} alt="image"/>
+                            <img className="img-resposive" src={campus.imgURL} alt="image not found"/>
                             </Link>
                         </div> 
                         )

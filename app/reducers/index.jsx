@@ -185,7 +185,7 @@ const rootReducer = function(state = initialState, action) {
       return Object.assign({}, state, {newStudentEmail: action.newStudentEmail});
     case EDIT_STUDENT_INFO:
     case DELETE_STUDENT:
-      return Object.assign({}, state, {students: students.filter(student => student.id !== action.studentId)})
+      return Object.assign({}, state, {students: state.students.filter(student => student.id !== action.studentId)})
 
     //campuses
     case GET_ALL_CAMPUSES:

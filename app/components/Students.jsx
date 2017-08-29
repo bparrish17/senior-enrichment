@@ -6,16 +6,17 @@ import store from '../store';
 import {fetchStudents} from '../reducers/index.jsx'; 
 import {getAllStudents, deleteStudent} from '../reducers/index.jsx';
 import AddStudent from './AddStudent.jsx';
+import Student from './Student.jsx';
 
 export default class Students extends React.Component {
     constructor() {
         super();
         this.state = store.getState();
-        this.handleDelete = this.handleDelete.bind(this);
+        //this.handleDelete = this.handleDelete.bind(this);
     }
     componentDidMount () {
-        const thunk = fetchStudents();
-        store.dispatch(thunk);
+        // const thunk = fetchStudents();
+        // store.dispatch(thunk);
         // axios.get('/api/students/')
         //   .then(res => res.data)
         //   .then(students => {
@@ -24,9 +25,9 @@ export default class Students extends React.Component {
         this.unsubscribe = store.subscribe(() => this.setState(store.getState()))
     }
 
-    handleDelete (studentId) {
-        store.dispatch(deleteStudent(studentId));
-    }
+    // handleDelete (studentId) {
+    //     store.dispatch(deleteStudent(studentId));
+    // }
 
     render() {
         const students = this.state.students;
@@ -37,17 +38,8 @@ export default class Students extends React.Component {
                 <ul className="list-group">
                 {students.map(student => {
                     return (
-                        <div key={student.id}>
-                            <Link to={`/students/${student.id}`}>
-                                <div width="100%">
-                                <button className="list-group-item list-group-item-action">{student.name}</button>
-                                </div>
-                            </Link>
-                            <li><button 
-                                className="btn btn-xs btn-danger remove btn-circle"
-                                onClick={() => this.handleDelete(student.id)}>
-                                    Remove</button></li>
-                            <li><button className="btn btn-xs btn-primary edit btn-circle">Edit Student</button></li>
+                        <div>
+                            <Student student={student} />
                         </div>
                     )
                 })}

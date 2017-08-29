@@ -1,28 +1,53 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import store from '../store';
+import Student from './Student';
 
 export default class SingleCampus extends Component {
     constructor () {
         super();
-        this.state = {
-          campus: {}
-        };
+        this.state = store.getState();
       }
-    
       componentDidMount () {
-        const campusId = this.props.match.params.campusId;
-    
-        axios.get(`/api/campuses/${campusId}`)
-          .then(res => res.data)
-          .then(campus => this.setState({
-            campus
-          }));
+        this.unsubscribe = store.subscribe(() => this.setState(store.getState()))
       }
+
+      componentWillUnmount() {
+        this.unsubscribe();
+      }
+
       render() {
-          const campus = this.state.campus;
+          const currentCampusId = Number(this.props.match.params.campusId);
+          const campusStudents = store.getState().students.filter(student => {
+            return student.campusId === currentCampusId;
+          })
+          const currentCampus = store.getState().campuses.find(campus => {
+            return campus.id === currentCampusId;
+          })
+          console.log('CURRENT CAMPUS: ', currentCampus);
           return (
               <div>
-                <h1>{campus.name}</h1>
+                <div className="col-xs-6">
+                  {currentCampus ? 
+                    (<div>
+                      <h3>Welcome to {currentCampus ? currentCampus.name : ""}</h3>
+                      <img className="img-responsive" src={currentCampus.imgURL} />
+                    </div>)
+                    : <div className="col-xs-8"></div>
+                  }
+                </div>
+                <div className="col-xs-4">
+                  <h3>Students</h3>
+                  <ul className="list-group">
+                  {campusStudents.map(student => {
+                    return (
+                        <div>
+                            <Student student={student} key={student.id}/>
+                        </div>
+                    )
+                })}
+                </ul>
+                </div>
               </div>
           )
       }

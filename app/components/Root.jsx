@@ -6,7 +6,7 @@ import Campuses from './Campuses';
 import SingleStudent from './SingleStudent';
 import SingleCampus from './SingleCampus';
 import {fetchStudents, fetchCampuses} from '../reducers';
-import store from '../store';
+import store from '../store'
 
 export default class Root extends Component {
 

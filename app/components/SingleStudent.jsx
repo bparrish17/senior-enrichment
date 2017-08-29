@@ -23,8 +23,8 @@ export default class SingleStudent extends Component {
         const campus = this.state.campuses.find(campus => campus.id === campusId);
         return (
               <div>
-                <h3>{student.name ? student.name : ''}</h3>
-                <h3>{campus.name ? campus.name : ''}</h3>
+                <h3>{student.name ? student.name : '-'}</h3>
+                <h3>{campus.name ? campus.name : '-'}</h3>
               </div>
           )
       }
