@@ -28,7 +28,7 @@ export default class Campuses extends React.Component {
                             <h3>
                                 <span>{campus.name}</span>
                             </h3>
-                            <img className="img-resposive" src={campus.imgURL} alt="image not found"/>
+                            <img className="img-responsive" src={campus.imgURL} alt="image not found"/>
                             </Link>
                         </div> 
                         )

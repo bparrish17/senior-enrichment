@@ -50,8 +50,8 @@ export default class AddStudent extends Component {
         const campuses = this.state.campuses;
         return (
             <div>
-                <div className="col-xs-5">
-                <h3>Add Student</h3>
+                <div className="col-xs-6">
+                <h3>Edit Student</h3>
                 <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
                   <input 
@@ -91,27 +91,3 @@ export default class AddStudent extends Component {
         )
     }
 }
-
-
-// <form onSubmit={props.handleSubmit}>
-// <div className="form-group">
-//   <label htmlFor="name">Add Student</label>
-//   <input 
-//     className="form-control" 
-//     type="text" 
-//     name="studentName" 
-//     placeholder="Enter Student Name" 
-//     />
-//   {/* DROPDOWN MENU FOR CAMPUSES */}
-//   <select onChange={/*-----*/} className="dropdown-item" name="School">
-//       {campuses.map(campus => {
-//           return <option value={campus.id}>{campus.name}</option>
-//       })}
-//   </select>
-// </div>
-// <div className="form-group">
-//   <button type="submit" className="btn btn-default">Create Channel</button>
-// </div>
-// </form>
-// value={/*-----*/} 
-// onChange={/*-----*/}

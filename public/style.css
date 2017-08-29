@@ -1,11 +1,14 @@
 
+#navbar-list {
+    background-color: #333;
+}
 
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    background-color: white;
 }
 
 li {
@@ -24,3 +27,45 @@ li a:hover {
     color: #333;
     background-color: #F2D20E;
 }
+
+#email-field {
+    border-left: none;
+    text-align: left;
+}
+
+.list-group-item {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.list-group-item:first-child{
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-right: none;
+}
+
+.list-group-item:last-child {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-left: none;
+}
+
+.btn-group-justified>.btn, .btn-group-justified>.btn-group {
+    display: inline;
+    float: left;
+    width: 33%;
+}
+
+.edit-student {
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+}
+
+

@@ -15,8 +15,8 @@ export default class Students extends React.Component {
         //this.handleDelete = this.handleDelete.bind(this);
     }
     componentDidMount () {
-        // const thunk = fetchStudents();
-        // store.dispatch(thunk);
+        const thunk = fetchStudents();
+        store.dispatch(thunk);
         // axios.get('/api/students/')
         //   .then(res => res.data)
         //   .then(students => {
@@ -33,13 +33,13 @@ export default class Students extends React.Component {
         const students = this.state.students;
         return (
             <div>
-                <div className="col-xs-6">
+                <div className="col-xs-7">
                 <h3>Students</h3>
                 <ul className="list-group">
                 {students.map(student => {
                     return (
                         <div>
-                            <Student student={student} />
+                            <Student student={student} key={student.id}/>
                         </div>
                     )
                 })}

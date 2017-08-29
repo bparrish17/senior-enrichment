@@ -146,6 +146,17 @@ export function addStudent(studentName, studentEmail, studentCampusId) {
   }
 }
 
+// export function editStudent(studentId) {
+//   return function thunk(dispatch) {
+//     return axios.put('api/students/'+studentId)
+//     .then(res => res.data)
+//     .then(student => {
+//       dispatch(editStudent(student))
+//     })
+//   }
+// }
+
+//FINISH EDITING THIS
 export function deleteStudentThunk(studentId) {
   return function thunk(dispatch) {
     return axios.delete('/api/students/'+studentId)
