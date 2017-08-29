@@ -7,6 +7,9 @@ export default class AddStudent extends Component {
     constructor() {
         super();
         this.state = store.getState();
+        this.handleStudentChange = this.handleStudentChange.bind(this);
+        this.handleCampusChange = this.handleCampusChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     componentDidMount() {
         this.unsubscribe = store.subscribe(() => this.setState(store.getState()))
@@ -27,8 +30,14 @@ export default class AddStudent extends Component {
     handleSubmit(event) {
         event.preventDefault();
         const student = store.getState().newStudent;
-        const campus = store.getState().newStudentCampus;
-        store.dispatch(addStudent(student, campus));
+        const campusName = store.getState().newStudentCampus;
+        if(!campusName) alert("Please Choose a Campus to Enroll In");
+        else {
+            const campusId = Number((store.getState().campuses.find(campus => {
+                return campus.name === campusName;
+            })).id);
+            store.dispatch(addStudent(student, campusId));
+        }
     }
 
     render() {
@@ -51,8 +60,9 @@ export default class AddStudent extends Component {
                 <label htmlFor="name">Choose Campus: </label>
                 <div className="form-group">
                     <select className="dropdown-item" name="School" width="400px" onChange={this.handleCampusChange}>
+                        <option value="selected disabled hidden">Choose here</option>
                         {campuses.map(campus => {
-                            return <option>{campus.name}</option>
+                            return <option key={campus.id} value={campus.name}>{campus.name}</option>
                         })}
                     </select>
                 </div>

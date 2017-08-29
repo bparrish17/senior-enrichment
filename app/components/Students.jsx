@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import store from '../store';
 import {fetchStudents} from '../reducers/index.jsx'; 
-import {getAllStudents} from '../reducers/index.jsx';
+import {getAllStudents, deleteStudent} from '../reducers/index.jsx';
 import AddStudent from './AddStudent.jsx';
 
 export default class Students extends React.Component {
-    //get campuses through props -- store?
     constructor() {
         super();
         this.state = store.getState();
+        this.handleDelete = this.handleDelete.bind(this);
     }
     componentDidMount () {
         const thunk = fetchStudents();
@@ -24,13 +24,15 @@ export default class Students extends React.Component {
         this.unsubscribe = store.subscribe(() => this.setState(store.getState()))
     }
 
+    handleDelete (event) {
+        console.log(event);
+        //store.dispatch(deleteStudent(studentId));
+    }
+
     render() {
         const students = this.state.students;
         return (
             <div>
-                {/* a row looks like this, try to map through
-                all the values to get it all into 4 tds
-                PROBLEM: Getting campus name, not id*/}
                 <div className="col-xs-6">
                 <h3>Students</h3>
                 <ul className="list-group">
@@ -42,7 +44,10 @@ export default class Students extends React.Component {
                                 <button className="list-group-item list-group-item-action">{student.name}</button>
                                 </div>
                             </Link>
-                            <li><button className="btn btn-xs btn-danger remove btn-circle">Remove</button></li>
+                            <li><button 
+                                className="btn btn-xs btn-danger remove btn-circle"
+                                onClick={this.handleDelete}>
+                                    Remove</button></li>
                             <li><button className="btn btn-xs btn-primary edit btn-circle">Edit Student</button></li>
                         </div>
                     )

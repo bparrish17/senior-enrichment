@@ -51,10 +51,10 @@ export const editStudent = (student) => {
       student
   }
 }
-export const deleteStudent = (student) => {
+export const deleteStudent = (studentId) => {
   return {
       type: DELETE_STUDENT,
-      student
+      studentId
   }
 }
 export const writeStudent = (newStudent) => {
@@ -124,9 +124,9 @@ export function fetchCampuses() {
   }
 }
 
-export function addStudent(name, campusId) {
+export function addStudent(studentName, studentCampusId) {
   return function thunk(dispatch) {
-    return axios.post('/api/students', {name, campusId})
+    return axios.post('/api/students', {name: studentName, campusId: studentCampusId})
     .then(res => res.data)
     .then(student => {
       dispatch(gotNewStudentFromServer(student))
@@ -156,6 +156,7 @@ const rootReducer = function(state = initialState, action) {
       return Object.assign({}, state, {newStudent: action.newStudent});
     case EDIT_STUDENT_INFO:
     case DELETE_STUDENT:
+      return Object.assign({}, state, {students: students.filter(student => student.id !== action.studentId)})
 
     case GET_ALL_CAMPUSES:
       return Object.assign({}, state, {campuses: action.campuses})
