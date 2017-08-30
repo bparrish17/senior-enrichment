@@ -146,13 +146,12 @@ export function addStudent(studentName, studentEmail, studentCampusId) {
   }
 }
 
-export function editStudentThunk(studentId) {
+export function editStudentThunk(studentId, name, email, campusId) {
   return function thunk(dispatch) {
-    return axios.put('api/students/'+studentId)
+    return axios.put('api/students/'+studentId, {name, email, campusId})
     .then(res => res.data)
     .then(student => {
-      console.log(student);
-      dispatch(editStudent(student))
+      dispatch(gotNewStudentFromServer(student))
     })
   }
 }
@@ -196,7 +195,7 @@ const rootReducer = function(state = initialState, action) {
     case WRITE_STUDENT_EMAIL:
       return Object.assign({}, state, {newStudentEmail: action.newStudentEmail});
     case EDIT_STUDENT_INFO:
-      return Object.assign({}, state, {students: state.students.concat(action.student)});
+      // return Object.assign({}, state, {students: state.students.concat(action.student)});
     case DELETE_STUDENT:
       return Object.assign({}, state, {students: state.students.filter(student => student.id !== action.studentId)})
 

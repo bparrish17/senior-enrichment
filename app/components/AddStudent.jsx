@@ -35,7 +35,6 @@ export default class AddStudent extends Component {
         event.preventDefault();
         const student = store.getState().newStudent;
         const studentEmail = store.getState().newStudentEmail;
-        console.log(studentEmail);
         const campusName = store.getState().newStudentCampus;
         if(!campusName) alert("Please Choose a Campus to Enroll In");
         else {
@@ -76,7 +75,7 @@ export default class AddStudent extends Component {
                 <label htmlFor="name">Choose Campus: </label>
                 <div className="form-group">
                     <select className="dropdown-item" name="School" width="400px" onChange={this.handleCampusChange}>
-                        <option value="selected disabled hidden">Choose Campus</option>
+                        <option value="selected disabled hidden">Choose New Campus</option>
                         {campuses.map(campus => {
                             return <option key={campus.id} value={campus.name}>{campus.name}</option>
                         })}
