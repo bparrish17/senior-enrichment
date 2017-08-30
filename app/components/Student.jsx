@@ -9,18 +9,32 @@ import AddStudent from './AddStudent.jsx';
 export default class Student extends React.Component {
     constructor(props) {
         super(props);
-        console.log('this.state', this.state)
-        this.state.editedName = props.student.name;
-        this.state.editedEmail = props.student.email;
-        this.state.editedCampus = props.student.campusId;
         this.state = store.getState();
-
-        this.handleDelete = this.handleDelete.bind(this);
+        //local state keys
         this.state.isEditing = false;
+        this.state.editedName = '';
+        this.state.editedEmail = '';
+        this.state.editedCampus = '';
+
+
+        //Methods
+        this.handleDelete = this.handleDelete.bind(this);
         this.handleWriteName = this.handleWriteName.bind(this);
         this.handleWriteEmail = this.handleWriteEmail.bind(this);
         this.handleWriteCampus = this.handleWriteCampus.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.startEditing = this.startEditing.bind(this);
+    }
+    componentDidMount() {
+        this.unsubscribe = store.subscribe(() => this.setState(store.getState()))
+    }
+
+    startEditing() {
+        console.log('MADE IT TO EDITING');
+        this.setState({isEditing: true});
+        this.setState({editedName: this.props.student.name});
+        this.setState({editedEmail: this.props.student.email});
+        this.setState({editedCampus: this.props.student.campusId});
     }
 
     handleDelete(studentId) {
@@ -41,11 +55,11 @@ export default class Student extends React.Component {
         this.setState({editedCampus: campusId});
     }
     handleSubmit(event) {
-        event.preventDefault();
         const changedName = this.state.editedName;
         const changedEmail = this.state.editedEmail;
         const changedCampus = this.state.editedCampus;
         store.dispatch(editStudentThunk(this.props.student.id, changedName, changedEmail, changedCampus));
+        // this.setState({isEditing: false});
     }
     
     render() {
@@ -56,7 +70,7 @@ export default class Student extends React.Component {
         })
         return (
             
-            !this.state.isEditing ? 
+            this.state.isEditing === false ? 
             (
             <div key={student.id}>
                 <Link to={`/students/${student.id}`}>
@@ -72,7 +86,7 @@ export default class Student extends React.Component {
                         Remove</button></li>
                 <li><button 
                     className="btn btn-xs btn-primary edit btn-circle"
-                    onClick = {() => this.setState({isEditing: true})}>Edit Student</button></li>
+                    onClick={() => this.startEditing()}>Edit Student</button></li>
                 <br />
                 <br />
             </div>)

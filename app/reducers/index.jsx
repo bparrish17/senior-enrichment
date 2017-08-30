@@ -62,6 +62,8 @@ export const deleteStudent = (studentId) => {
       studentId
   }
 }
+
+//ADDING A STUDENT
 export const writeStudent = (newStudent) => {
   return {
     type: WRITE_STUDENT,

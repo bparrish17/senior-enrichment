@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import store from '../store';
 import Student from './Student';
+import AddStudent from './AddStudent';
 
 export default class SingleCampus extends Component {
     constructor () {
@@ -36,7 +37,7 @@ export default class SingleCampus extends Component {
                     : <div className="col-xs-8"></div>
                   }
                 </div>
-                <div className="col-xs-4">
+                <div className="col-xs-5">
                   <h3>Students</h3>
                   <ul className="list-group">
                   {campusStudents.map(student => {
@@ -48,6 +49,7 @@ export default class SingleCampus extends Component {
                 })}
                 </ul>
                 </div>
+                <AddStudent />
               </div>
           )
       }
