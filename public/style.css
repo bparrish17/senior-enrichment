@@ -33,6 +33,18 @@ li a:hover {
     text-align: left;
 }
 
+#edit-dropdown {
+    display: inline-block;
+    width: 98%;
+    vertical-align: middle;
+}
+
+.form-inline .form-control {
+    display: inline-block;
+    width: 98%;
+    vertical-align: middle;
+}
+
 .list-group-item {
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;

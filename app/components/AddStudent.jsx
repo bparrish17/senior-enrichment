@@ -20,7 +20,7 @@ export default class AddStudent extends Component {
     }
 
     handleStudentChange(event) {
-        console.log(event.target.value)
+        // console.log(event.target.value)
         store.dispatch(writeStudent(event.target.value))
     }
 
@@ -76,7 +76,7 @@ export default class AddStudent extends Component {
                 <label htmlFor="name">Choose Campus: </label>
                 <div className="form-group">
                     <select className="dropdown-item" name="School" width="400px" onChange={this.handleCampusChange}>
-                        <option value="selected disabled hidden">Choose here</option>
+                        <option value="selected disabled hidden">Choose Campus</option>
                         {campuses.map(campus => {
                             return <option key={campus.id} value={campus.name}>{campus.name}</option>
                         })}

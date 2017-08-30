@@ -38,8 +38,8 @@ export default class Students extends React.Component {
                 <ul className="list-group">
                 {students.map(student => {
                     return (
-                        <div>
-                            <Student student={student} key={student.id}/>
+                        <div key={student.id}>
+                            <Student student={student} />
                         </div>
                     )
                 })}
