@@ -9,10 +9,12 @@ import AddStudent from './AddStudent.jsx';
 export default class Student extends React.Component {
     constructor(props) {
         super(props);
+        console.log('this.state', this.state)
+        this.state.editedName = props.student.name;
+        this.state.editedEmail = props.student.email;
+        this.state.editedCampus = props.student.campusId;
         this.state = store.getState();
-        this.state.editedName = this.props.student.name;
-        this.state.editedEmail = this.props.student.email;
-        this.state.editedCampus = this.props.student.campusId;
+
         this.handleDelete = this.handleDelete.bind(this);
         this.state.isEditing = false;
         this.handleWriteName = this.handleWriteName.bind(this);

@@ -41,8 +41,8 @@ export default class SingleCampus extends Component {
                   <ul className="list-group">
                   {campusStudents.map(student => {
                     return (
-                        <div>
-                            <Student student={student} key={student.id}/>
+                        <div key={student.id}>
+                            <Student student={student}/>
                         </div>
                     )
                 })}

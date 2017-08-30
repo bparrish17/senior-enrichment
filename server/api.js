@@ -31,6 +31,7 @@ api.put('/students/:studentId', function(req, res, next) {
     var id = req.params.studentId;
     User.findById(id)
     .then(student => {student.update(req.body) })
+    .then(response => res.json(response))
     .catch(next);
 })
 
