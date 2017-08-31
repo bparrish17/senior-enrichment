@@ -14,7 +14,6 @@ export default class SingleCampus extends Component {
 
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleImageChange = this.handleImageChange.bind(this);
-        this.editingMode = this.editingMode.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
 
@@ -28,36 +27,26 @@ export default class SingleCampus extends Component {
       }
 
       handleNameChange(event) {
-        console.log("NAME CHANGE", this.state);
-        // this.editingMode();
         let newName = event.target.value;
         this.setState({editedCampusName: newName});
       }
       handleImageChange(event) {
-        console.log("IMAGE CHANGE", this.state);
-        // this.editingMode();
         let newImage = event.target.value;
         this.setState({editedCampusImage: newImage});
       }
 
-      editingMode() {
-        // const currentCampusId = Number(this.props.match.params.campusId);
-        // const campusToEdit = store.getState().campuses.find(campus => {
-        //   return campus.id === currentCampusId;
-        // })
-        // this.setState({editedCampusName: campusToEdit.name});
-        // this.setState({editedCampusImage: campusToEdit.imgURL});
-      }
+      
       handleDelete(campusId) {
-        store.dispatch(deleteCampusThunk(campusId));
+        store.dispatch(deleteCampusThunk(campusId, this.props.history));
       }
 
       handleSubmit(event) {
+        console.log("HERE");
         event.preventDefault();
 
         //preserve old campus value if unchanged
         const campusId = Number(this.props.match.params.campusId);
-        const campusToEdit = store.getState().campuses.find(campus => {
+        const campusToEdit = this.state.campuses.find(campus => {
           return campus.id === campusId;
         })
         var changedName = '';
@@ -72,13 +61,14 @@ export default class SingleCampus extends Component {
 
       render() {
           const currentCampusId = Number(this.props.match.params.campusId);
-          const campusStudents = store.getState().students.filter(student => {
+          const campusStudents = this.state.students.filter(student => {
             return student.campusId === currentCampusId;
           })
-          const currentCampus = store.getState().campuses.find(campus => {
+          const currentCampus = this.state.campuses.find(campus => {
             return campus.id === currentCampusId;
           })
-          return (
+          if(currentCampus) {
+            return (
               <div>
                 <div className="col-xs-6">
                   {currentCampus ? 
@@ -139,7 +129,13 @@ export default class SingleCampus extends Component {
                 <div className="col-xs-6">
             </div>
               </div>
-          )
+            ) 
+          } else {
+            return (<div>
+                      <h2>No Campus With ID: {currentCampusId}</h2>
+                    </div>
+                  )
+          }
       }
 }
 
@@ -156,3 +152,12 @@ export default class SingleCampus extends Component {
         //   });
         // }
         // const changedImage = this.state.editedCampusImage;
+
+        // tingMode() {
+          //   // const currentCampusId = Number(this.props.match.params.campusId);
+          //   // const campusToEdit = store.getState().campuses.find(campus => {
+          //   //   return campus.id === currentCampusId;
+          //   // })
+          //   // this.setState({editedCampusName: campusToEdit.name});
+          //   // this.setState({editedCampusImage: campusToEdit.imgURL});
+          // }

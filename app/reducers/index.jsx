@@ -174,7 +174,7 @@ export function addStudent(studentName, studentEmail, studentCampusId) {
 
 export function editStudentThunk(studentId, name, email, campusId) {
   return function thunk(dispatch) {
-    return axios.put('api/students/'+studentId.toString(), {name, email, campusId})
+    return axios.put('/api/students/'+studentId, {name, email, campusId})
     .then(res => res.data)
     .then(student => {
       dispatch(editStudent(student))
@@ -183,12 +183,15 @@ export function editStudentThunk(studentId, name, email, campusId) {
 }
 
 //FINISH EDITING THIS
-export function deleteStudentThunk(studentId) {
+export function deleteStudentThunk(studentId, history) {
   return function thunk(dispatch) {
     return axios.delete('/api/students/'+studentId)
     .then(res => res.data)
     .then(student => {
       dispatch(deleteStudent(studentId))
+      if(history) {
+        history.push('/students')
+      }
     })
   }
 }
@@ -205,19 +208,20 @@ export function addCampus(campusName, campusImage) {
 
 export function editCampusThunk(campusId, campusName, campusImage) {
   return function thunk(dispatch) {
-    return axios.put('api/campuses/'+campusId.toString(), {name: campusName, imgURL: campusImage})
+    return axios.put('/api/campuses/'+campusId, {name: campusName, imgURL: campusImage})
     .then(res => res.data)
     .then(campus => {
       dispatch(editCampus(campus))
     })
   }
 }
-export function deleteCampusThunk(campusId) {
+export function deleteCampusThunk(campusId, history) {
   return function thunk(dispatch) {
     return axios.delete('/api/campuses/'+campusId)
     .then(res => res.data)
     .then(campus => {
       dispatch(deleteCampus(campusId))
+      history.push('/campuses');
     })
   }
 }
@@ -264,7 +268,7 @@ const rootReducer = function(state = initialState, action) {
         return campus.id !== action.campus.id }).concat(action.campus)}
       );
     case DELETE_CAMPUS:
-      //return Object.assign({}, state, {campuses: state.campuses.filter(campus => campus.id !== action.campus)})
+      return Object.assign({}, state, {campuses: state.campuses.filter(campus => campus.id !== action.campus)})
     default: return state
   }
 };

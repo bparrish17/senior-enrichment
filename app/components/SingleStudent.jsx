@@ -20,17 +20,20 @@ export default class SingleStudent extends Component {
       render() {
         const currentId = Number(this.props.match.params.studentId);
         const currentStudent = this.state.students.find(student => student.id === currentId);
-        const currentCampusId = currentStudent.campusId;
-        const currentCampus = this.state.campuses.find(campus => campus.id === currentCampusId);
-
-        return (
-              <div>
-                <h3>{currentStudent.name}</h3>
-                <br />
-                <ul className="list-group">
-                  <Student student={currentStudent} />
-                </ul>
-              </div>
-          )
+        if(currentStudent) {
+          const currentCampusId = currentStudent.campusId;
+          const currentCampus = this.state.campuses.find(campus => campus.id === currentCampusId);
+          return (
+                <div>
+                  <h3>{currentStudent.name}</h3>
+                  <br />
+                  <ul className="list-group">
+                    <Student student={currentStudent} history={this.props.history} />
+                  </ul>
+                </div>
+            )
+        } else {
+          return (<div/>)
+        }
       }
 }
