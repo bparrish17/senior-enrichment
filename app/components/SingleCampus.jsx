@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import store from '../store';
-import {editCampusThunk, deleteCampusThunk} from '../reducers/index.jsx';
+import {editCampusThunk, deleteCampusThunk, deleteStudentThunk} from '../reducers/index.jsx';
 import Student from './Student';
 import AddStudent from './AddStudent';
 
@@ -37,6 +37,12 @@ export default class SingleCampus extends Component {
 
       
       handleDelete(campusId) {
+        const deletedStudents = this.state.students.filter(student => {
+          return student.campusId === campusId; 
+        });
+        deletedStudents.forEach(student => {
+          store.dispatch(deleteStudentThunk(student.id));
+        });
         store.dispatch(deleteCampusThunk(campusId, this.props.history));
       }
 

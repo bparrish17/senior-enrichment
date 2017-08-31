@@ -69,6 +69,7 @@ export default class Student extends React.Component {
     }
     
     render() {
+        var campus = '';
         const student = this.state.students.find(student => {
             // console.log('STUDENT', student);
             // console.log('PROPS STUDENT ID', this.props.student.id);
@@ -76,7 +77,7 @@ export default class Student extends React.Component {
         );
         const campuses = this.state.campuses;
         if(student) {
-            const campus = campuses.find(campus => { return campus.id === student.campusId; })
+            campus = campuses.find(campus => { return campus.id === student.campusId; })
             return (
                 this.state.isEditing === false ? 
                 (

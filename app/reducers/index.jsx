@@ -220,6 +220,7 @@ export function deleteCampusThunk(campusId, history) {
     return axios.delete('/api/campuses/'+campusId)
     .then(res => res.data)
     .then(campus => {
+      console.log(campus);
       dispatch(deleteCampus(campusId))
       history.push('/campuses');
     })

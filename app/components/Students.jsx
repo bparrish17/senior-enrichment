@@ -28,9 +28,6 @@ export default class Students extends React.Component {
         this.unsubscribe();
     }
 
-    // handleDelete (studentId) {
-    //     store.dispatch(deleteStudent(studentId));
-    // }
 
     render() {
         const students = this.state.students;
