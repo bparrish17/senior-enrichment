@@ -7,11 +7,14 @@ const initialState = {
   campuses: [],
   newStudent: '',
   newStudentCampus: '',
-  newStudentEmail: ''
+  newStudentEmail: '',
+  newCampusName: '',
+  newCampusImage: ''
 }
 
 
 //ACTION TYPES
+//-students
 export const GET_ALL_STUDENTS = 'GET_ALL_STUDENTS';
 export const GOT_NEW_STUDENT = 'GOT_NEW_STUDENT';
 
@@ -24,8 +27,15 @@ export const CREATE_STUDENT = 'CREATE_STUDENT';
 export const EDIT_STUDENT_INFO = 'EDIT_STUDENT_INFO';
 export const DELETE_STUDENT = 'DELETE_STUDENT'
 
+
+//-campuses
 export const GET_ALL_CAMPUSES = 'GET_ALL_CAMPUSES';
 export const GOT_NEW_CAMPUS = 'GOT_NEW_CAMPUS';
+
+//--adding new campus
+export const WRITE_CAMPUS_NAME = 'WRITE_CAMPUS_NAME';
+export const WRITE_CAMPUS_IMAGE = 'WRITE_CAMPUS_IMAGE';
+
 export const CREATE_CAMPUS = 'CREATE_CAMPUS';
 export const EDIT_CAMPUS_INFO = 'EDIT_CAMPUS_INFO';
 export const DELETE_CAMPUS = 'DELETE_CAMPUS';
@@ -93,7 +103,7 @@ export const getAllCampuses = (campuses) => {
 export const gotNewCampusFromServer = (campus) => {
   return {
     type: GOT_NEW_CAMPUS,
-    student
+    campus
   }
 }
 export const createCampus = (campus) => {
@@ -112,6 +122,20 @@ export const deleteCampus = (campus) => {
   return {
       type: DELETE_CAMPUS,
       campus
+  }
+}
+
+//ADDING A CAMPUS
+export const writeCampusName = (newCampusName) => {
+  return {
+    type: WRITE_CAMPUS_NAME,
+    newCampusName
+  }
+}
+export const writeCampusImage = (newCampusImage) => {
+  return {
+    type: WRITE_CAMPUS_IMAGE,
+    newCampusImage
   }
 }
 
@@ -143,7 +167,7 @@ export function addStudent(studentName, studentEmail, studentCampusId) {
     return axios.post('/api/students', {name: studentName, email: studentEmail, campusId: studentCampusId})
     .then(res => res.data)
     .then(student => {
-      dispatch(editStudent(student))
+      dispatch(gotNewStudentFromServer(student))
     })
   }
 }
@@ -169,12 +193,22 @@ export function deleteStudentThunk(studentId) {
   }
 }
 
-export function addCampus(name, imgUrl) {
+export function addCampus(campusName, campusImage) {
   return function thunk(dispatch) {
-    return axios.post('/api/campuses', {name, imgUrl})
+    return axios.post('/api/campuses', {name: campusName, imgURL: campusImage})
     .then(res => res.data)
-    .then(student => {
-      dispatch(gotNewCampusFromServer(student))
+    .then(campus => {
+      dispatch(gotNewCampusFromServer(campus))
+    })
+  }
+}
+
+export function editCampusThunk(campusId, campusName, campusImage) {
+  return function thunk(dispatch) {
+    return axios.put('api/campuses/'+campusId.toString(), {name: campusName, imgURL: campusImage})
+    .then(res => res.data)
+    .then(campus => {
+      dispatch(editCampus(campus))
     })
   }
 }
@@ -198,7 +232,9 @@ const rootReducer = function(state = initialState, action) {
       return Object.assign({}, state, {newStudentEmail: action.newStudentEmail});
     case EDIT_STUDENT_INFO:
       return Object.assign({}, state, {students: state.students.filter(student => {
-        return student.id !== action.student.id }).concat(action.student)});
+        console.log('ACTION STUDENT', action.student)
+        return student.id !== action.student.id }).concat(action.student)}
+      );
     case DELETE_STUDENT:
       return Object.assign({}, state, {students: state.students.filter(student => student.id !== action.studentId)})
 
@@ -206,8 +242,20 @@ const rootReducer = function(state = initialState, action) {
     case GET_ALL_CAMPUSES:
       return Object.assign({}, state, {campuses: action.campuses})
     case GOT_NEW_CAMPUS:
+      return Object.assign({}, state, {campuses: state.campuses.concat(action.campus)})
+
+    //--adding new campus
+    //---adding new student
+    case WRITE_CAMPUS_NAME:
+      return Object.assign({}, state, {newCampusName: action.newCampusName});
+    case WRITE_CAMPUS_IMAGE:
+      return Object.assign({}, state, {newCampusImage: action.newCampusImage});
+    
     case CREATE_CAMPUS:
     case EDIT_CAMPUS_INFO:
+      return Object.assign({}, state, {campuses: state.campuses.filter(campus => {
+        return campus.id !== action.campus.id }).concat(action.campus)}
+      );
     case DELETE_CAMPUS:
     default: return state
   }

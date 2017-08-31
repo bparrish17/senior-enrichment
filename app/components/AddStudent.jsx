@@ -42,6 +42,7 @@ export default class AddStudent extends Component {
                 return campus.name === campusName;
             })).id);
             store.dispatch(addStudent(student, studentEmail, campusId));
+            document.getElementById("add-student-form").reset();
         }
     }
 
@@ -51,7 +52,7 @@ export default class AddStudent extends Component {
             <div>
                 <div className="col-xs-5">
                 <h3>Add Student</h3>
-                <form onSubmit={this.handleSubmit}>
+                <form id="add-student-form" onSubmit={this.handleSubmit}>
                 <div className="form-group">
                   <input 
                     className="form-control" 

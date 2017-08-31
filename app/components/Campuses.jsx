@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import store from '../store';
 import {getAllCampuses} from '../reducers/index.jsx';
+import AddCampus from './AddCampus';
 
 export default class Campuses extends React.Component {
     //get campuses through props -- store?
@@ -13,12 +14,19 @@ export default class Campuses extends React.Component {
     componentDidMount () {
         this.unsubscribe = store.subscribe(() => this.setState(store.getState()))
     }
+    componentWillUnmount() {
+        this.unsubscribe();
+    }
+
     render() {
         const campuses = this.state.campuses;
         return (
             <div>
-                <div className="row container-fluid">
                 <h3>Campuses</h3>
+                <div className="row container-fluid">
+                    <AddCampus />
+                </div>
+                <div className="row container-fluid">
                 <br />
                 {
                     campuses.map(campus => { 

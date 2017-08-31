@@ -30,7 +30,7 @@ api.get('/students/:studentId', function(req, res, next) {
 api.put('/students/:studentId', function(req, res, next) {
     var id = req.params.studentId;
     User.findById(id)
-    .then(student => {student.update(req.body) })
+    .then(student => {return student.update(req.body)})
     .then(response => res.json(response))
     .catch(next);
 })
@@ -69,8 +69,8 @@ api.get('/campuses/:campusId', function(req, res, next) {
 
 api.post('/campuses', function(req, res, next) {
     let name = req.body.name;
-    let imgUrl = req.body.imgUrl;
-    Campus.create({name, imgUrl})
+    let imgURL = req.body.imgURL;
+    Campus.create({name, imgURL})
     .then(campus => res.json(campus))
     .catch(next)
 })
@@ -78,7 +78,8 @@ api.post('/campuses', function(req, res, next) {
 api.put('/campuses/:campusId', function(req, res, next) {
     var id = req.params.campusId;
     Campus.findById(id)
-    .then(campus => {campus.update(req.body) })
+    .then(campus => {return campus.update(req.body) })
+    .then(response => res.json(response))
     .catch(next);
 })
 
