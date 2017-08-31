@@ -53,7 +53,7 @@ export default class Student extends React.Component {
         this.setState({editedEmail: newEmail});
     }
     handleWriteCampus(event) {
-        let campusId = Number((store.getState().campuses.find(campus => {
+        let campusId = Number((this.state.campuses.find(campus => {
             return campus.name === event.target.value;
         })).id);
         this.setState({editedCampus: campusId});
@@ -68,9 +68,9 @@ export default class Student extends React.Component {
     }
     
     render() {
-        const student = store.getState().students.find(student => {
+        const student = this.state.students.find(student => {
             return student.id === this.props.student.id; });
-        const campuses = store.getState().campuses;
+        const campuses = this.state.campuses;
         const campus = campuses.find(campus => {
             return campus.id === student.campusId;
         })

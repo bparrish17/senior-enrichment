@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import store from '../store';
-import {editCampusThunk} from '../reducers/index.jsx';
+import {editCampusThunk, deleteCampusThunk} from '../reducers/index.jsx';
 import Student from './Student';
 import AddStudent from './AddStudent';
 
@@ -16,6 +16,7 @@ export default class SingleCampus extends Component {
         this.handleImageChange = this.handleImageChange.bind(this);
         this.editingMode = this.editingMode.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
 
       }
       componentDidMount () {
@@ -47,6 +48,9 @@ export default class SingleCampus extends Component {
         // this.setState({editedCampusName: campusToEdit.name});
         // this.setState({editedCampusImage: campusToEdit.imgURL});
       }
+      handleDelete(campusId) {
+        store.dispatch(deleteCampusThunk(campusId));
+      }
 
       handleSubmit(event) {
         event.preventDefault();
@@ -74,7 +78,6 @@ export default class SingleCampus extends Component {
           const currentCampus = store.getState().campuses.find(campus => {
             return campus.id === currentCampusId;
           })
-          console.log("RENDER STATE", this.state);
           return (
               <div>
                 <div className="col-xs-6">
@@ -106,6 +109,14 @@ export default class SingleCampus extends Component {
                           <button type="submit" className="btn btn-primary">Submit Changes</button>
                         </div>
                   </form>
+                  <ul>
+                    <li><button 
+                      id="remove-campus-button"
+                      className="btn btn-xs btn-danger remove btn-circle"
+                      onClick={() => this.handleDelete(currentCampus.id)}>
+                        Remove Campus
+                        </button></li>
+                  </ul>
                     </div>)
                     : <div className="col-xs-8"></div>
                   }

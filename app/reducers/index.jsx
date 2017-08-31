@@ -212,7 +212,15 @@ export function editCampusThunk(campusId, campusName, campusImage) {
     })
   }
 }
-
+export function deleteCampusThunk(campusId) {
+  return function thunk(dispatch) {
+    return axios.delete('/api/campuses/'+campusId)
+    .then(res => res.data)
+    .then(campus => {
+      dispatch(deleteCampus(campusId))
+    })
+  }
+}
 
 const rootReducer = function(state = initialState, action) {
   switch(action.type) {
@@ -232,7 +240,6 @@ const rootReducer = function(state = initialState, action) {
       return Object.assign({}, state, {newStudentEmail: action.newStudentEmail});
     case EDIT_STUDENT_INFO:
       return Object.assign({}, state, {students: state.students.filter(student => {
-        console.log('ACTION STUDENT', action.student)
         return student.id !== action.student.id }).concat(action.student)}
       );
     case DELETE_STUDENT:
@@ -257,6 +264,7 @@ const rootReducer = function(state = initialState, action) {
         return campus.id !== action.campus.id }).concat(action.campus)}
       );
     case DELETE_CAMPUS:
+      //return Object.assign({}, state, {campuses: state.campuses.filter(campus => campus.id !== action.campus)})
     default: return state
   }
 };

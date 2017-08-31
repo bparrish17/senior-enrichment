@@ -79,6 +79,11 @@ li a:hover {
     margin: 0px;
     border: 0px;
 }
+#remove-campus-button {
+    width: 130px;
+    height: 34px;
+    font-size: 14px;
+}
 
 /* .btn.btn-primary {
     text-decoration-color: #333;

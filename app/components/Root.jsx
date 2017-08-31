@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './Navbar';
+import Home from './Home';
 import Students from './Students';
 import Campuses from './Campuses';
 import SingleStudent from './SingleStudent';
@@ -32,6 +33,8 @@ export default class Root extends Component {
         )
     }
 }
+
+// /<Route exact path="/" component={Home} />
 
 // <main>
 // <Switch>
