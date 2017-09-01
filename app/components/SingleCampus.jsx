@@ -30,6 +30,7 @@ export default class SingleCampus extends Component {
         let newName = event.target.value;
         this.setState({editedCampusName: newName});
       }
+      
       handleImageChange(event) {
         let newImage = event.target.value;
         this.setState({editedCampusImage: newImage});

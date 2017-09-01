@@ -22,6 +22,7 @@ export default class Root extends Component {
                     <Navbar />
                     <div>
                         <Switch>
+                            <Route exact path="/" component={Home} />
                             <Route exact path="/home" component={Home} />
                             <div className="container-fluid">
                                 <Route exact path="/students" component={Students} />
