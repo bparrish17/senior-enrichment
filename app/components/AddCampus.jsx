@@ -19,12 +19,10 @@ export default class AddCampus extends Component {
     }
 
     handleCampusNameChange(event) {
-        // console.log(event.target.value)
         store.dispatch(writeCampusName(event.target.value))
     }
 
     handleCampusImageChange(event) {
-        // console.log(event.target.value)
         store.dispatch(writeCampusImage(event.target.value))
     }
 

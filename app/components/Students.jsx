@@ -17,11 +17,6 @@ export default class Students extends React.Component {
     componentDidMount () {
         const thunk = fetchStudents();
         store.dispatch(thunk);
-        // axios.get('/api/students/')
-        //   .then(res => res.data)
-        //   .then(students => {
-        //     this.setState({ students })
-        //   });
         this.unsubscribe = store.subscribe(() => this.setState(store.getState()))
     }
     componentWillUnmount() {

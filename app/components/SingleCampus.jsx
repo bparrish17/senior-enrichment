@@ -145,26 +145,3 @@ export default class SingleCampus extends Component {
           }
       }
 }
-
-// this.setState({editedCampusName: campusToEdit.name});
-        // const changedName = this.state.editedCampusName;
-        // const changedImage = this.state.editedCampusImage;
-        // if(!changedName) this.setState({editedCampusName: campusToEdit.name});
-        // if(!changedImage) this.setState({editedCampusImage: campusToEdit.imgURL});
-
-        // if(this.state.editedCampusImage.length === 0) {
-        //   changedImage = campusToEdit.imgURL;
-        //   console.log('CAMPUS TO EDIT URL', campusToEdit.imgURL)
-        //   this.setState({editedCampusImage: campusToEdit.imgURL}, () => {
-        //   });
-        // }
-        // const changedImage = this.state.editedCampusImage;
-
-        // tingMode() {
-          //   // const currentCampusId = Number(this.props.match.params.campusId);
-          //   // const campusToEdit = store.getState().campuses.find(campus => {
-          //   //   return campus.id === currentCampusId;
-          //   // })
-          //   // this.setState({editedCampusName: campusToEdit.name});
-          //   // this.setState({editedCampusImage: campusToEdit.imgURL});
-          // }

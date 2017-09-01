@@ -71,8 +71,6 @@ export default class Student extends React.Component {
     render() {
         var campus = '';
         const student = this.state.students.find(student => {
-            // console.log('STUDENT', student);
-            // console.log('PROPS STUDENT ID', this.props.student.id);
             return student.id === this.props.student.id; }
         );
         const campuses = this.state.campuses;

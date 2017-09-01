@@ -37,15 +37,3 @@ export default class Root extends Component {
         )
     }
 }
-
-// /<Route exact path="/" component={Home} />
-
-// <main>
-// <Switch>
-//     <Route exact path="/students" component={Students} />
-//     {/*<Route path="/api/students/:studentId" component={SingleStudent} />*/}
-//     {/*<Route exact path="/api/campuses" component={Campuses} />*/}
-//     {/*<Route path="/api/campuses/:campusId" component={SingleCampus} />*/}
-//     {/*<Route component={StatefulAlbums} />*/}
-// </Switch>
-//</main>

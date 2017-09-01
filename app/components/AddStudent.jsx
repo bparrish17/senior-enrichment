@@ -20,7 +20,6 @@ export default class AddStudent extends Component {
     }
 
     handleStudentChange(event) {
-        // console.log(event.target.value)
         store.dispatch(writeStudent(event.target.value))
     }
 
@@ -91,27 +90,3 @@ export default class AddStudent extends Component {
         )
     }
 }
-
-
-// <form onSubmit={props.handleSubmit}>
-// <div className="form-group">
-//   <label htmlFor="name">Add Student</label>
-//   <input 
-//     className="form-control" 
-//     type="text" 
-//     name="studentName" 
-//     placeholder="Enter Student Name" 
-//     />
-//   {/* DROPDOWN MENU FOR CAMPUSES */}
-//   <select onChange={/*-----*/} className="dropdown-item" name="School">
-//       {campuses.map(campus => {
-//           return <option value={campus.id}>{campus.name}</option>
-//       })}
-//   </select>
-// </div>
-// <div className="form-group">
-//   <button type="submit" className="btn btn-default">Create Channel</button>
-// </div>
-// </form>
-// value={/*-----*/} 
-// onChange={/*-----*/}
